@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Android 12+: keep the Seeker Connect wallet authorization out of cloud backups and device transfers. -->
+<data-extraction-rules>
+    <cloud-backup>
+        <exclude domain="sharedpref" path="SeekerConnectAuthorizationCache.xml" />
+    </cloud-backup>
+    <device-transfer>
+        <exclude domain="sharedpref" path="SeekerConnectAuthorizationCache.xml" />
+    </device-transfer>
+</data-extraction-rules>

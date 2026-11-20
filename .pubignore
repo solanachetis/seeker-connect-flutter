@@ -1,0 +1,14 @@
+# .pubignore replaces .gitignore for `dart pub publish`: keep both lists in sync.
+.superpowers/
+docs/
+.dart_tool/
+build/
+pubspec.lock
+*.iml
+.idea/
+local.properties
+.gradle/
+.kotlin/
+.flutter-plugins-dependencies
+example/build/
+example/.dart_tool/

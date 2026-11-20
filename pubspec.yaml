@@ -1,17 +1,20 @@
 name: seeker_connect_flutter
-description: "A new Flutter plugin project."
-version: 0.0.1
-homepage:
+description: "Unofficial community Flutter plugin for Solana Mobile Seeker Connect: one-tap \"Connect with Seeker\" wallet connection on Android. Not affiliated with Solana Mobile."
+version: 0.1.0
+topics:
+  - solana
+  - wallet
+  - seeker
+  - web3
 
 environment:
   sdk: ^3.14.0
-  flutter: '>=3.3.0'
+  flutter: '>=3.50.0'
 
 dependencies:
   flutter:
     sdk: flutter
   meta: ^1.19.0
-  plugin_platform_interface: ^2.0.2
 
 dev_dependencies:
   flutter_test:
