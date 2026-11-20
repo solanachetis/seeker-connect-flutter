@@ -6,3 +6,4 @@ export 'src/errors.dart';
 export 'src/events.dart';
 export 'src/models.dart';
 export 'src/seeker_connect.dart';
+export 'src/widgets/seeker_connect_button.dart';
