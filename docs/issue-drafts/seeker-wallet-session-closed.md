@@ -1,5 +1,6 @@
 # Brouillon de signalement pour Solana Mobile
-n**Publié le 2026-11-21 (une seule issue) :** https://github.com/solana-mobile/seeker-connect/issues/44
+
+**Publié le 2026-11-21 (une seule issue) :** https://github.com/solana-mobile/seeker-connect/issues/44
 
 **Où le publier :** https://github.com/solana-mobile/seeker-connect/issues/new
 (leur `CONTRIBUTING.md` demande de passer par une issue, une question par issue, avec les versions).
