@@ -5,3 +5,4 @@ library;
 export 'src/errors.dart';
 export 'src/events.dart';
 export 'src/models.dart';
+export 'src/seeker_connect.dart';
