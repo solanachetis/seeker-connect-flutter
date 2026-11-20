@@ -17,6 +17,8 @@ class SeekerConnectConfig {
     required this.identity,
     this.chain = 'solana:mainnet',
     this.showDialogs = true,
+    this.firstConnectWalletBaseUri,
+    this.associationTimeoutMs,
   });
 
   final DappIdentity identity;
@@ -26,6 +28,13 @@ class SeekerConnectConfig {
 
   /// Whether `SeekerConnectDialogs` shows its built-in progress/error cards.
   final bool showDialogs;
+
+  /// App Link base URI tried on first connection. Null uses the SDK default
+  /// (`https://connect.solanamobile.com`, the certified wallets' shared domain).
+  final String? firstConnectWalletBaseUri;
+
+  /// How long to wait for the wallet to connect. Null uses the SDK default (30 s).
+  final int? associationTimeoutMs;
 }
 
 /// Which wallet a connection would reach on this device.

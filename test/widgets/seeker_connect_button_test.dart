@@ -92,4 +92,13 @@ void main() {
     expect(bounds.right, closeTo(viewBox.right, 0.05));
     expect(bounds.bottom, closeTo(viewBox.bottom, 0.05));
   });
+
+  testWidgets('labelIsNotUnderlinedUnderMaterialFallbackStyle', (tester) async {
+    await tester.pumpWidget(_host(DefaultTextStyle(
+      style: const TextStyle(decoration: TextDecoration.underline, decorationColor: Color(0xFFFFFF00)),
+      child: SeekerConnectButton(onPressed: () {}),
+    )));
+    final rich = tester.widget<RichText>(find.byType(RichText));
+    expect(rich.text.style?.decoration, TextDecoration.none);
+  });
 }

@@ -263,20 +263,26 @@ data class MsgDappIdentity (
 /** Generated class from Pigeon that represents data sent in messages. */
 data class MsgConfig (
   val identity: MsgDappIdentity,
-  val chain: String
+  val chain: String,
+  val firstConnectWalletBaseUri: String? = null,
+  val associationTimeoutMs: Long? = null
 )
  {
   companion object {
     fun fromList(pigeonVar_list: List<Any?>): MsgConfig {
       val identity = pigeonVar_list[0] as MsgDappIdentity
       val chain = pigeonVar_list[1] as String
-      return MsgConfig(identity, chain)
+      val firstConnectWalletBaseUri = pigeonVar_list[2] as String?
+      val associationTimeoutMs = pigeonVar_list[3] as Long?
+      return MsgConfig(identity, chain, firstConnectWalletBaseUri, associationTimeoutMs)
     }
   }
   fun toList(): List<Any?> {
     return listOf(
       identity,
       chain,
+      firstConnectWalletBaseUri,
+      associationTimeoutMs,
     )
   }
   override fun equals(other: Any?): Boolean {
@@ -287,17 +293,19 @@ data class MsgConfig (
       return true
     }
     val other = other as MsgConfig
-    return MessagesPigeonUtils.deepEquals(this.identity, other.identity) && MessagesPigeonUtils.deepEquals(this.chain, other.chain)
+    return MessagesPigeonUtils.deepEquals(this.identity, other.identity) && MessagesPigeonUtils.deepEquals(this.chain, other.chain) && MessagesPigeonUtils.deepEquals(this.firstConnectWalletBaseUri, other.firstConnectWalletBaseUri) && MessagesPigeonUtils.deepEquals(this.associationTimeoutMs, other.associationTimeoutMs)
   }
 
   override fun hashCode(): Int {
     var result = javaClass.hashCode()
     result = 31 * result + MessagesPigeonUtils.deepHash(this.identity)
     result = 31 * result + MessagesPigeonUtils.deepHash(this.chain)
+    result = 31 * result + MessagesPigeonUtils.deepHash(this.firstConnectWalletBaseUri)
+    result = 31 * result + MessagesPigeonUtils.deepHash(this.associationTimeoutMs)
     return result
   }
   override fun toString(): String {
-    return "MsgConfig(identity=$identity, chain=$chain)"
+    return "MsgConfig(identity=$identity, chain=$chain, firstConnectWalletBaseUri=$firstConnectWalletBaseUri, associationTimeoutMs=$associationTimeoutMs)"
   }
 }
 

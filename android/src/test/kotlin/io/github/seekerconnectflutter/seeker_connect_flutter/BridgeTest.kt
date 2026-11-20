@@ -46,9 +46,11 @@ class BridgeTest {
         val cache = MemoryAuthorizationCache()
         val events = Recorder()
         val identities = mutableListOf<String>()
+        val configs = mutableListOf<com.solanamobile.seekerconnect.SeekerConnectConfig>()
         val scope = CoroutineScope(SupervisorJob() + StandardTestDispatcher(test.testScheduler))
         val bridge = Bridge(scope, { host }, { cfg, presenter ->
             identities += cfg.identity.name
+            configs += cfg
             SeekerConnect(cfg, link, cache, presenter)
         }, events)
     }
@@ -244,5 +246,18 @@ class BridgeTest {
         val seen = h.events.authorizations
         assertTrue(seen.any { it?.accounts?.single()?.address == FAKE_ADDRESS })
         assertNull(seen.last())
+    }
+
+    @Test
+    fun configurePassesConnectionOptions() = runTest {
+        val h = Harness(this)
+        h.bridge.configure(config)
+        val defaults = h.configs.last()
+        assertEquals("https://connect.solanamobile.com", defaults.firstConnectWalletBaseUri)
+        assertEquals(30_000L, defaults.associationTimeoutMs)
+        h.bridge.configure(config.copy(firstConnectWalletBaseUri = "https://wallet.example", associationTimeoutMs = 5_000L))
+        assertEquals("https://wallet.example", h.configs.last().firstConnectWalletBaseUri)
+        assertEquals(5_000L, h.configs.last().associationTimeoutMs)
+        assertEquals("solana:devnet", h.configs.last().chain)
     }
 }

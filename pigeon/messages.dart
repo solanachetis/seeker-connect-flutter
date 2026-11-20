@@ -24,9 +24,17 @@ class MsgDappIdentity {
 }
 
 class MsgConfig {
-  MsgConfig({required this.identity, required this.chain});
+  MsgConfig({
+    required this.identity,
+    required this.chain,
+    this.firstConnectWalletBaseUri,
+    this.associationTimeoutMs,
+  });
   MsgDappIdentity identity;
   String chain;
+  // Null means "use the SDK default".
+  String? firstConnectWalletBaseUri;
+  int? associationTimeoutMs;
 }
 
 enum MsgWalletAvailability { certified, other, none }

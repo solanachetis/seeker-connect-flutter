@@ -1,5 +1,7 @@
 package io.github.seekerconnectflutter.seeker_connect_flutter
 
+import com.solanamobile.seekerconnect.DEFAULT_ASSOCIATION_TIMEOUT_MS
+import com.solanamobile.seekerconnect.DEFAULT_FIRST_CONNECT_WALLET_BASE_URI
 import com.solanamobile.seekerconnect.DappIdentity
 import com.solanamobile.seekerconnect.SeekerConnectConfig
 import com.solanamobile.seekerconnect.SeekerConnectException
@@ -31,6 +33,8 @@ internal fun SeekerConnectException.Code.toFlutterCode(): String = when (this) {
 internal fun MsgConfig.toSdk() = SeekerConnectConfig(
     identity = DappIdentity(identity.name, identity.uri, identity.icon),
     chain = chain,
+    firstConnectWalletBaseUri = firstConnectWalletBaseUri ?: DEFAULT_FIRST_CONNECT_WALLET_BASE_URI,
+    associationTimeoutMs = associationTimeoutMs ?: DEFAULT_ASSOCIATION_TIMEOUT_MS,
 )
 
 internal fun WalletAvailability.toMsg() = when (this) {

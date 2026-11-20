@@ -36,7 +36,11 @@ class SeekerConnectButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final dark = (brightness ?? MediaQuery.maybePlatformBrightnessOf(context) ?? Brightness.light) == Brightness.dark;
+    final dark =
+        (brightness ??
+            MediaQuery.maybePlatformBrightnessOf(context) ??
+            Brightness.light) ==
+        Brightness.dark;
     final active = enabled && onPressed != null;
     var background = dark ? _white : _black;
     var foreground = dark ? _black : _white;
@@ -53,30 +57,50 @@ class SeekerConnectButton extends StatelessWidget {
       excludeSemantics: true,
       child: FocusableActionDetector(
         enabled: active,
-        actions: {ActivateIntent: CallbackAction<ActivateIntent>(onInvoke: (_) => onPressed?.call())},
+        actions: {
+          ActivateIntent: CallbackAction<ActivateIntent>(
+            onInvoke: (_) => onPressed?.call(),
+          ),
+        },
         child: GestureDetector(
           onTap: active ? onPressed : null,
           behavior: HitTestBehavior.opaque,
           child: ConstrainedBox(
-            constraints: const BoxConstraints(maxWidth: 368, minHeight: 56, maxHeight: 56),
+            constraints: const BoxConstraints(
+              maxWidth: 368,
+              minHeight: 56,
+              maxHeight: 56,
+            ),
             child: SizedBox(
               width: double.infinity,
               height: 56,
               child: DecoratedBox(
-                decoration: BoxDecoration(color: background, borderRadius: BorderRadius.circular(16)),
+                decoration: BoxDecoration(
+                  color: background,
+                  borderRadius: BorderRadius.circular(16),
+                ),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Padding(
                       padding: const EdgeInsets.only(right: 19),
-                      child: CustomPaint(size: const Size(18.2, 24), painter: _GlyphPainter(foreground)),
+                      child: CustomPaint(
+                        size: const Size(18.2, 24),
+                        painter: _GlyphPainter(foreground),
+                      ),
                     ),
                     Flexible(
                       child: Text(
                         variant.label,
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
-                        style: TextStyle(color: foreground, fontSize: 20, fontWeight: FontWeight.w500),
+                        // decoration: none — MaterialApp's fallback style is a yellow underline.
+                        style: TextStyle(
+                          color: foreground,
+                          fontSize: 20,
+                          fontWeight: FontWeight.w500,
+                          decoration: TextDecoration.none,
+                        ),
                       ),
                     ),
                   ],
@@ -100,7 +124,10 @@ class _GlyphPainter extends CustomPainter {
   void paint(Canvas canvas, Size size) {
     canvas
       ..save()
-      ..scale(size.width / sGlyphViewBox.width, size.height / sGlyphViewBox.height)
+      ..scale(
+        size.width / sGlyphViewBox.width,
+        size.height / sGlyphViewBox.height,
+      )
       ..translate(-sGlyphViewBox.left, -sGlyphViewBox.top)
       ..drawPath(_path, Paint()..color = color)
       ..restore();

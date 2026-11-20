@@ -172,16 +172,24 @@ class MsgConfig {
   MsgConfig({
     required this.identity,
     required this.chain,
+    this.firstConnectWalletBaseUri,
+    this.associationTimeoutMs,
   });
 
   MsgDappIdentity identity;
 
   String chain;
 
+  String? firstConnectWalletBaseUri;
+
+  int? associationTimeoutMs;
+
   List<Object?> _toList() {
     return <Object?>[
       identity,
       chain,
+      firstConnectWalletBaseUri,
+      associationTimeoutMs,
     ];
   }
 
@@ -193,6 +201,8 @@ class MsgConfig {
     return MsgConfig(
       identity: result[0]! as MsgDappIdentity,
       chain: result[1]! as String,
+      firstConnectWalletBaseUri: result[2] as String?,
+      associationTimeoutMs: result[3] as int?,
     );
   }
 
@@ -205,7 +215,7 @@ class MsgConfig {
     if (identical(this, other)) {
       return true;
     }
-    return _deepEquals(identity, other.identity) && _deepEquals(chain, other.chain);
+    return _deepEquals(identity, other.identity) && _deepEquals(chain, other.chain) && _deepEquals(firstConnectWalletBaseUri, other.firstConnectWalletBaseUri) && _deepEquals(associationTimeoutMs, other.associationTimeoutMs);
   }
 
   @override
@@ -214,7 +224,7 @@ class MsgConfig {
 
   @override
   String toString() {
-    return 'MsgConfig(identity: $identity, chain: $chain)';
+    return 'MsgConfig(identity: $identity, chain: $chain, firstConnectWalletBaseUri: $firstConnectWalletBaseUri, associationTimeoutMs: $associationTimeoutMs)';
   }
 }
 

@@ -68,7 +68,8 @@ class _HomeScreenState extends State<HomeScreen> {
     setState(() {
       _busy = false;
       _status = status;
-      _authorization = SeekerConnect.currentAuthorization ?? _authorization;
+      // Always mirror the plugin: after a failed revoke it is already disconnected.
+      _authorization = SeekerConnect.currentAuthorization;
     });
   }
 

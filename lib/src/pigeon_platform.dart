@@ -30,6 +30,8 @@ class PigeonSeekerConnectPlatform extends SeekerConnectPlatform implements Seeke
         MsgConfig(
           identity: MsgDappIdentity(name: config.identity.name, uri: config.identity.uri, icon: config.identity.icon),
           chain: config.chain,
+          firstConnectWalletBaseUri: config.firstConnectWalletBaseUri,
+          associationTimeoutMs: config.associationTimeoutMs,
         ),
       );
 

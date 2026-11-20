@@ -106,4 +106,21 @@ void main() {
     await emit(tester, const SeekerInteractionFailed(SeekerConnectErrorCode.authorizationDeclined));
     expect(find.text('Connexion refusée'), findsOneWidget);
   });
+
+  testWidgets('cardTextIsNotUnderlinedUnderMaterialFallbackStyle', (tester) async {
+    // MaterialApp's builder output sits under a yellow double-underline fallback style.
+    await tester.pumpWidget(const Directionality(
+      textDirection: TextDirection.ltr,
+      child: DefaultTextStyle(
+        style: TextStyle(decoration: TextDecoration.underline, decorationColor: Color(0xFFFFFF00)),
+        child: SeekerConnectDialogs(child: SizedBox.shrink()),
+      ),
+    ));
+    await emit(tester, const SeekerInteractionStarted(1));
+    final texts = tester.widgetList<RichText>(find.byType(RichText)).toList();
+    expect(texts, isNotEmpty);
+    for (final t in texts) {
+      expect(t.text.style?.decoration, TextDecoration.none, reason: t.text.toPlainText());
+    }
+  });
 }
