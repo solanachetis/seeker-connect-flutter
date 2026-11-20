@@ -13,7 +13,7 @@ Add a one-tap **"Connect with Seeker"** button to your Flutter app. On a Solana 
 - `SeekerConnectDialogs`: progress and error cards with the official copy (English, French provided), which you can turn off
 - The wallet's auth token never leaves the native side
 
-**Android only**, like the official SDK. On iOS and other platforms every call reports `SeekerConnectErrorCode.unsupportedPlatform` and `walletAvailability()` returns `none`.
+**Android only**, like the official SDK. On iOS and other platforms `walletAvailability()` returns `none`, `restore()` returns `null`, `configure`/`disconnect`/`cancelInteraction` do nothing, and every wallet call (`connect`, `signIn`, signing) throws `SeekerConnectErrorCode.unsupportedPlatform`.
 
 ## Requirements
 
@@ -75,6 +75,8 @@ android:fullBackupContent="@xml/backup_rules"
 ## Quick start
 
 ```dart
+import 'dart:convert';
+
 import 'package:flutter/widgets.dart';
 import 'package:seeker_connect_flutter/seeker_connect_flutter.dart';
 
@@ -123,6 +125,18 @@ Show the built-in cards by wrapping your app once, e.g. `MaterialApp(builder: (c
 `noWalletFound`, `associationFailed`, `authorizationDeclined`, `requestDeclined`, `sessionClosed`, `cancelled`, `walletError` (from the official SDK), plus `unsupportedPlatform`, `notConfigured`, `hostNotSupported`.
 
 > ⚠️ **Never retry `signAndSendTransactions` automatically**, even after `sessionClosed`: the transaction may already have been submitted. Check on-chain first.
+
+## Tested on a real Seeker
+
+v0.1.0 was tested with the example app on a Solana Seeker (Android 16, Seeker Wallet 1.22.0, devnet), on 2026-11-21: wallet detected as `certified`, direct connection with no wallet picker, Sign-In With Solana and message signatures verified (Ed25519), devnet transaction signed, connection restored after a full app restart without opening the wallet, disconnect, and disconnect + revoke (confirmed in the wallet's logs). Not yet tested on a device: `signAndSendTransactions`, rotation while the wallet is open, rapid double taps.
+
+### What to expect from the Seeker Wallet
+
+These are wallet behaviours, not plugin bugs. Apps built on the official SDK see the same.
+
+- **The wallet's network must match your `chain`.** If the Seeker Wallet is set to mainnet and your transaction uses a devnet blockhash, the wallet shows *Network mismatch* and closes the session: you get `sessionClosed`. Authorizing `solana:devnet` still succeeds in that state, so the mismatch only shows up when signing. Tell your users which network to select.
+- **Declining = `sessionClosed`.** The wallet's signing sheet has no reject button, only a close (×). Closing it ends the session without an MWA error, so you will get `sessionClosed`, not `requestDeclined`, and the built-in card says *Connection lost*. For `signMessages` / `signTransactions`, treat `sessionClosed` as "not signed". For `signAndSendTransactions`, never assume: check on-chain before doing anything else.
+- **Don't gate features on `capabilities.supportsSignAndSendTransactions`.** The wallet reported `false` (its features list only contained `solana:signTransactions`, transaction versions `legacy`). That legacy flag may not reflect sign-and-send support under Mobile Wallet Adapter 2.0; this plugin has not yet verified sign-and-send on a device.
 
 ## Example
 
