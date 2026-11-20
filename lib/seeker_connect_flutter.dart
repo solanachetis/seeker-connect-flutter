@@ -1,8 +1,7 @@
+/// Unofficial community Flutter plugin for Solana Mobile Seeker Connect.
+/// Not affiliated with Solana Mobile.
+library;
 
-import 'seeker_connect_flutter_platform_interface.dart';
-
-class SeekerConnectFlutter {
-  Future<String?> getPlatformVersion() {
-    return SeekerConnectFlutterPlatform.instance.getPlatformVersion();
-  }
-}
+export 'src/errors.dart';
+export 'src/events.dart';
+export 'src/models.dart';

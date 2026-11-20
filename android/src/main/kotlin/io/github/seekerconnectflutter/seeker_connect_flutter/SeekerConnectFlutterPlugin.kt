@@ -2,17 +2,9 @@ package io.github.seekerconnectflutter.seeker_connect_flutter
 
 import io.flutter.embedding.engine.plugins.FlutterPlugin
 
-/** SeekerConnectFlutterPlugin */
-class SeekerConnectFlutterPlugin :
-    FlutterPlugin,
-    SeekerConnectFlutterPluginApi {
-    override fun onAttachedToEngine(flutterPluginBinding: FlutterPlugin.FlutterPluginBinding) {
-        SeekerConnectFlutterPluginApi.setUp(flutterPluginBinding.binaryMessenger, this)
-    }
+/** Seeker Connect Flutter plugin. The host API is wired in a later step. */
+class SeekerConnectFlutterPlugin : FlutterPlugin {
+    override fun onAttachedToEngine(binding: FlutterPlugin.FlutterPluginBinding) {}
 
-    override fun getPlatformVersion(): String = "Android ${android.os.Build.VERSION.RELEASE}"
-
-    override fun onDetachedFromEngine(binding: FlutterPlugin.FlutterPluginBinding) {
-        SeekerConnectFlutterPluginApi.setUp(binding.binaryMessenger, null)
-    }
+    override fun onDetachedFromEngine(binding: FlutterPlugin.FlutterPluginBinding) {}
 }
