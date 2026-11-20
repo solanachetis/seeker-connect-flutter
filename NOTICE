@@ -1,0 +1,13 @@
+seeker_connect_flutter
+Unofficial community Flutter plugin for Solana Mobile Seeker Connect.
+Not affiliated with, endorsed by, or maintained by Solana Mobile.
+
+This product wraps the official Seeker Connect Android SDK
+(com.solanamobile:seeker-connect), Copyright Solana Mobile Inc.,
+licensed under the Apache License, Version 2.0:
+https://github.com/solana-mobile/seeker-connect
+
+The "S" glyph vector paths used by SeekerConnectButton are ported from
+android/seeker-connect-compose/src/main/kotlin/com/solanamobile/seekerconnect/compose/BrandVectors.kt
+in that repository (Apache License, Version 2.0). "Seeker" and the Seeker
+marks are trademarks of Solana Mobile Inc.
