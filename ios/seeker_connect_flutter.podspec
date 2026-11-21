@@ -4,14 +4,14 @@
 #
 Pod::Spec.new do |s|
   s.name             = 'seeker_connect_flutter'
-  s.version          = '0.0.1'
-  s.summary          = 'A new Flutter plugin project.'
+  s.version          = '0.1.0'
+  s.summary          = 'Unofficial community Flutter plugin for Solana Mobile Seeker Connect (Android only; iOS is a no-op).'
   s.description      = <<-DESC
-A new Flutter plugin project.
+Seeker Connect is Android only. On iOS this plugin registers nothing and the Dart side reports unsupportedPlatform.
                        DESC
-  s.homepage         = 'http://example.com'
+  s.homepage         = 'https://github.com/solanachetis/seeker-connect-flutter'
   s.license          = { :file => '../LICENSE' }
-  s.author           = { 'Your Company' => 'email@example.com' }
+  s.author           = { 'SolanaChetis' => 'https://github.com/solanachetis' }
   s.source           = { :path => '.' }
   s.source_files = 'seeker_connect_flutter/Sources/seeker_connect_flutter/**/*'
   s.dependency 'Flutter'

@@ -1,6 +1,8 @@
 name: seeker_connect_flutter
 description: "Unofficial community Flutter plugin for Solana Mobile Seeker Connect: one-tap \"Connect with Seeker\" wallet connection on Android. Not affiliated with Solana Mobile."
 version: 0.1.0
+repository: https://github.com/solanachetis/seeker-connect-flutter
+issue_tracker: https://github.com/solanachetis/seeker-connect-flutter/issues
 topics:
   - solana
   - wallet
